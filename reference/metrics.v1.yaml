@@ -1,0 +1,227 @@
+openapi: 3.0.0
+tags:
+  - name: assessment
+info:
+  title: metrics
+  version: '1.0'
+  description: API for metric consumption
+  contact:
+    name: Credo-AI
+    url: 'https://demo.credo.ai/'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /metrics:
+    parameters: []
+    get:
+      summary: gets all metrics for dataset assessment
+      description: can return metrics that apply only to particular assessments
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: ''
+                minItems: 1
+                uniqueItems: true
+                items:
+                  $ref: ../models/metrics.v1.yaml
+              examples:
+                all-metrics:
+                  value:
+                    - name: 'Recall '
+                      description: 'Out of all the samples that are of a gender, how many did the system correctly identify as being of that gender?'
+                    - name: Disparate Impact
+                      description: Adverse impacts that affects one group of people of a protected characteristic more than another
+                    - name: Base Rate
+                      description: Similar to 'prior possibilities'- probabilities unconditioned on featured attributes or evidences
+                    - name: Difference
+                      description: Difference between one single group and another
+                    - name: Mean Differences
+                      description: Measure of dispersion equal to the average difference of two independent attributes/values
+                    - name: Precision
+                      description: 'In words - out of all the samples that were predicted to be of a particular gender, how many are actually of that gender?'
+                    - name: False Discovery Rate (FDR)
+                      description: 'Lower the FDR, better the performance. This is error rate metric used in the Gender Shades paper'
+                    - name: False Negative Rate (FNR)
+                      description: 'Lower the FNR, better the performance'
+                    - name: False Positive Rate (FPR)
+                      description: 'Lower the FPR, better the performance'
+                    - name: 'Difference: difference of the metric for unprivileged and privileged groups'
+                      description: difference between one single group and another
+                    - name: 'Ratio: ratio of the metric for unprivileged and privileged groups'
+                      description: quantitative relation between two attributes showing the number of times one value contains or is contained within the other
+                    - name: "Base_Rate:  base rate, \U0001D443\U0001D45F(\U0001D44C=1)=\U0001D443/(\U0001D443+\U0001D441), optionally conditioned on protected attributes"
+                      description: similar to  prior possibilities - probabilities unconditioned on featured attributes or evidences
+                    - name: 'Consistency: measures how similar the labels are for similar instances'
+                      description: How similar measurements are to those of another attribute
+                    - name: 'Disparate Impact:  measure quantitatively the adverse treatment of protected classes, which leads to discrimination in lending, hiring, housing, etc'
+                      description: Adverse impacts that affects one group of people of a protected characteristic more than another
+                    - name: 'Mean_Differences: alias of statistical_parity_difference()'
+                      description: Measure of dispersion equal to the average difference of two independent attributes/values
+                    - name: "Num_Negatives: number of negatives, \U0001D441=∑\U0001D45B\U0001D456=1\U0001D7D9[\U0001D466\U0001D456=0], optionally conditioned on protected attributes"
+                      description: ''
+                    - name: "Num_Positives: number of positives, \U0001D443=∑\U0001D45B\U0001D456=1\U0001D7D9[\U0001D466\U0001D456=1], optionally conditioned on protected attributes"
+                      description: ''
+                    - name: 'Rich_Subgroup: audit dataset with respect to rich subgroups defined by linear thresholds of sensitive attributes'
+                      description: '***Metric to bridge the gap between statistical and individual notions of fairness'
+                    - name: 'Smoothed_empirical_differential_fairness:'
+                      description: ''
+                    - name: 'Statistical_parity_difference:'
+                      description: When the distance/difference is so small said to be statistical parity
+                    - name: "Accuracy: \U0001D434\U0001D436\U0001D436=(\U0001D447\U0001D443+\U0001D447\U0001D441)/(\U0001D443+\U0001D441)"
+                      description: ''
+                    - name: 'Average_abs_odds_difference: average of absolute difference in FPR and TPR for unprivileged and privileged groups'
+                      description: ''
+                    - name: 'Average_odds_difference: average of difference in FPR and TPR for unprivileged and privileged groups'
+                      description: ''
+                    - name: "Between_all_groups_coefficient_of_variation: the between-group coefficient of variation is two times the square root of the between_all_groups_generalized_entropy_index() with \U0001D6FC=2"
+                      description: ''
+                    - name: 'Between_all_groups_generalized_entropy_index: between-group generalized entropy index that uses all combinations of groups based on self.dataset.protected_attributes'
+                      description: ''
+                    - name: "Between_all_groups_theil_index: between-group Theil index is the between_all_groups_generalized_entropy_index with \U0001D6FC=1"
+                      description: ''
+                    - name: "Between_group_coefficient_of_variation: between-group coefficient of variation is two times the square root of the between_group_generalized_entropy_index() with \U0001D6FC=2"
+                      description: ''
+                    - name: 'Between_group_gereralized_entropy _index: Between-group generalized entropy index that uses self.privileged_groups and self.unprivileged_groups as the only two groups'
+                      description: ''
+                    - name: "Between_group_theil_index: between-group Theil index is the between_group_generalized_entropy_index() with \U0001D6FC=1"
+                      description: ''
+                    - name: 'Binary_confusion_matrix: number of true/false positives/negatives, optionally conditioned on protected attributes'
+                      description: Number of true/false positives/negatives
+                    - name: "Coefficient_of_variation: two times the square root of the generalized_entropy_index() with \U0001D6FC=2"
+                      description: ''
+                    - name: 'Differential_fairness_bais_amplification: difference in smoothed EDF between the classifier and the original dataset'
+                      description: ''
+                    - name: 'Equal_opportunity_difference: alias of true_positive_rate_difference()'
+                      description: ''
+                    - name: "Error_rate: \U0001D445\U0001D445=(\U0001D439\U0001D443+\U0001D439\U0001D441)/(\U0001D443+\U0001D441)"
+                      description: ''
+                    - name: "Error_rate_difference: difference in error rates for unprivileged and privileged groups, \U0001D438\U0001D445\U0001D445\U0001D437=unprivileged - \U0001D438\U0001D445\U0001D445\U0001D437=privileged"
+                      description: ''
+                    - name: "Error_rate_ratio: ratio of error rates for unprivileged and privileged groups, \U0001D438\U0001D445\U0001D445\U0001D437=unprivileged / \U0001D438\U0001D445\U0001D445\U0001D437=privileged"
+                      description: ''
+                    - name: "False_discovery_rate: \U0001D437\U0001D445=\U0001D439\U0001D443/(\U0001D447\U0001D443+\U0001D439\U0001D443)"
+                      description: The false discovery rate is the ratio of the number of false positive results to the number of total positive test results
+                    - name: "False_discovery_rate_difference: FD\U0001D445\U0001D437=unprivileged - FD\U0001D445\U0001D437=privileged"
+                      description: ''
+                    - name: "False_discovery_rate_ratio: FD\U0001D445\U0001D437=unprivileged / FD\U0001D445\U0001D437=privileged"
+                      description: ''
+                    - name: "False_negative_rate: \U0001D439\U0001D441\U0001D445=\U0001D439\U0001D441/\U0001D443"
+                      description: Rate which incorrectly indicates that a particular condition or attribute is absent
+                    - name: "False_negative_rate_difference: FN\U0001D445\U0001D437=unprivileged - FN\U0001D445\U0001D437=privileged"
+                      description: Difference in rate which incorrectly indicates that a particular condition or attribute is absent
+                    - name: "False_negative_rate_ratio: FN\U0001D445\U0001D437=unprivileged / FN\U0001D445\U0001D437=privileged"
+                      description: Ratio of rate which incorrectly indicates that a particular condition or attribute is absent
+                    - name: "False _omission_rate: \U0001D439\U0001D442\U0001D445=\U0001D439\U0001D441/(\U0001D447\U0001D441+\U0001D439\U0001D441)"
+                      description: (complement of the negative predictive value) Rate which measures the proportion of false negatives which are incorrectly rejected
+                    - name: "False_omission_rate_difference: FO\U0001D445\U0001D437=unprivileged - FO\U0001D445\U0001D437=privileged"
+                      description: Difference in rate which measures the proportion of false negatives which are incorrectly rejected
+                    - name: "False_omission_rate_ratio: FO\U0001D445\U0001D437=unprivileged / FO\U0001D445\U0001D437=privileged"
+                      description: Ratio of rate which measures the proportion of false negatives which are incorrectly rejected
+                    - name: "False_positive_rate: \U0001D439\U0001D443\U0001D445=\U0001D439\U0001D443/\U0001D441"
+                      description: Rate which incorrectly indicates that a particular condition or attribute is present
+                    - name: "False_positive_rate_difference: FP\U0001D445\U0001D437=unprivileged - FP\U0001D445\U0001D437=privileged"
+                      description: Difference in rate which incorrectly indicates that a particular condition or attribute is present
+                    - name: "False_positive_rate_ratio: FP\U0001D445\U0001D437=unprivileged / FP\U0001D445\U0001D437=privileged"
+                      description: Ratio of rates which incorrectly indicates that a particular condition or attribute is present
+                    - name: Generealized_binary_confusion_matrix
+                      description: 'number of generalized true/false positives/negatives, optionally conditioned on protected attributes'
+                    - name: Generalized_entropy_index
+                      description: generalized entropy index is proposed as a unified individual and group fairness measure
+                    - name: "Generalized_false_negative_rate: \U0001D43A\U0001D439\U0001D441\U0001D445=\U0001D43A\U0001D439\U0001D441/\U0001D443"
+                      description: ''
+                    - name: "Generalized_false_positive_rate: \U0001D43A\U0001D439\U0001D443\U0001D445=\U0001D43A\U0001D439\U0001D443/\U0001D441"
+                      description: ''
+                    - name: "Generalized_true_negative_rate: \U0001D43A\U0001D439\U0001D443\U0001D445=\U0001D43A\U0001D439\U0001D443/\U0001D441"
+                      description: ''
+                    - name: Generalized_true_positive_rate
+                      description: "ratio of generalized true positives to positive examples in the dataset, \U0001D43A\U0001D447\U0001D443\U0001D445=\U0001D43A\U0001D447\U0001D443/\U0001D443, optionally conditioned on protected attributes"
+                    - name: "Negative_predictive_value: \U0001D441\U0001D443\U0001D449=\U0001D447\U0001D441/(\U0001D447\U0001D441+\U0001D439\U0001D441)"
+                      description: ''
+                    - name: 'Num_false_negatives:'
+                      description: ''
+                    - name: 'Num_false_positives:'
+                      description: ''
+                    - name: Num_generalized_false_negatives
+                      description: "generalized number of false negatives, \U0001D43A\U0001D439\U0001D441 the weighted sum of 1 - predicted scores where true labels are ‘favorable’, optionally conditioned on protected attributes"
+                    - name: Num_generalized_false_positives
+                      description: "generalized number of false positives, \U0001D43A\U0001D439\U0001D443 the weighted sum of predicted scores where true labels are ‘unfavorable’, optionally conditioned on protected attributes"
+                    - name: Num_generalized_true_negatives
+                      description: 'generalized number of true negatives, GTN, the weighted sum of 1 - predicted scores where true labels are ‘unfavorable’, optionally conditioned on protected attributes'
+                    - name: Num_generalized_true_positives
+                      description: "generalized number of true positives, \U0001D43A\U0001D447\U0001D443, the weighted sum of predicted scores where true labels are ‘favorable’, optionally conditioned on protected attributes"
+                    - name: 'Num_pred_negatives:'
+                      description: ''
+                    - name: 'Num_pred_positives:'
+                      description: ''
+                    - name: 'Num_true_negatives:'
+                      description: ''
+                    - name: 'Num_true_positives:'
+                      description: ''
+                    - name: 'Performance_measures: various performance measures on the dataset, optionally conditioned on protected attributes'
+                      description: ''
+                    - name: "Predictive_positive_values: \U0001D443\U0001D449=\U0001D447\U0001D443/(\U0001D447\U0001D443+\U0001D439\U0001D443)"
+                      description: ''
+                    - name: 'Power: alias of num_true_positives()'
+                      description: ''
+                    - name: 'Precision: alias of predictive_positive_values()'
+                      description: ''
+                    - name: 'Recall: alias of true_positive_rate()'
+                      description: ''
+                    - name: 'Selection_rate:'
+                      description: ''
+                    - name: 'Sensitivity:  alias of true_postive_rate()'
+                      description: ''
+                    - name: 'Smoothed_empirical_differential_fairness: smoothed EDF'
+                      description: ''
+                    - name: 'Specificity:  alias of true_negative_rate()'
+                      description: ''
+                    - name: "Theil_index: generalized_entropy_index() with \U0001D6FC=1"
+                      description: ''
+                    - name: "True_negative_rate: \U0001D447\U0001D441\U0001D445=\U0001D447\U0001D441/N"
+                      description: ''
+                    - name: True_positive_rate
+                      description: 'return the ratio of true positives to positive examples in the dataset, TPR=TP/P, optionally conditioned on protected attributes'
+                    - name: True_positive_rate_difference
+                      description: "TP\U0001D445\U0001D437=unprivileged - TP\U0001D445\U0001D437=privileged"
+                    - name: Mahalanobis_distance
+                      description: compute the average Mahalanobis distance between the samples from the two datasets
+                    - name: Manhattan_distance
+                      description: compute the average Manhattan distance between the samples from the two datasets.
+                    - name: 'Maximum_euclidean_distance:'
+                      description: ''
+                    - name: 'Maximum_mahalanobis_distance:'
+                      description: ''
+                    - name: 'Maximum_manhattan_distance:'
+                      description: ''
+                    - name: 'Mean_euclidean_distance_difference: difference of the averages'
+                      description: ''
+                    - name: 'Mean_euclidean_distance_ratio: ratio of the averages'
+                      description: ''
+                    - name: 'Total_euclidean_distance:'
+                      description: ''
+                    - name: 'Total_mahalanobis_distance:'
+                      description: ''
+                    - name: 'Total_manhattan_distance:'
+                      description: ''
+                    - name: 'Mean_mahalanobis_distance_difference: difference of the averages'
+                      description: ''
+                    - name: 'Mean_mahalanobis_distance_ratio:  ratio of the averages'
+                      description: ''
+                    - name: 'Mean_manhattan_distance_difference: difference of the averages'
+                      description: ''
+                    - name: 'Mean_manhattan_distance_ratio: ratio of the averages'
+                      description: ''
+      operationId: get-metrics
+      parameters:
+        - schema:
+            type: array
+          in: query
+          name: applies_to_assessment
+          description: filter metrics by given assessments
+components:
+  responses: {}

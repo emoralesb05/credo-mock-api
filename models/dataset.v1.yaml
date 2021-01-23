@@ -1,0 +1,5 @@
+title: dataset
+type: object
+properties:
+  id:
+    type: string

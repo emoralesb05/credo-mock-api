@@ -1,0 +1,23 @@
+title: metrics
+type: object
+x-tags:
+  - assessment
+x-examples:
+  example-1:
+    id: '1'
+    name: metric
+    description: some description for metric
+    assessment_applies_to:
+      - fairness
+description: ''
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  description:
+    type: string
+  applies_to_assessment:
+    type: array
+    items:
+      type: string
